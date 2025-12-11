@@ -1,0 +1,385 @@
+<%- include('../partials/admin-header') %>
+<%- include('../partials/admin-sidebar') %>
+
+<style>
+  body {
+    background: #f5f6fa;
+  }
+
+  .admin-dashboard {
+    margin-left: 240px;
+    padding: 24px;
+    min-height: 100vh;
+    background: #f5f6fa;
+  }
+
+  .card-soft {
+    background: #ffffff;
+    border-radius: 18px;
+    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.08);
+    border: none;
+  }
+
+  .stat-card {
+    padding: 18px 20px;
+  }
+
+  .stat-label {
+    font-size: 0.9rem;
+    color: #64748b;
+    margin-bottom: 4px;
+  }
+
+  .stat-value {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #0f172a;
+  }
+
+  .mini-ring {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background:
+      conic-gradient(#6366f1 0 220deg, #e5e7eb 0 360deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mini-ring-inner {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #ffffff;
+  }
+
+  /* Revenue chart dummy bars */
+  .bar-chart {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    height: 180px;
+  }
+
+  .bar {
+    flex: 1;
+    border-radius: 999px;
+    background: linear-gradient(180deg, #a5b4fc, #6366f1);
+  }
+
+  .bar-alt {
+    background: linear-gradient(180deg, #f9a8d4, #ec4899);
+  }
+
+  .bar-label {
+    font-size: 0.8rem;
+    color: #94a3b8;
+    text-align: center;
+    margin-top: 6px;
+  }
+
+  .progress-line {
+    width: 100%;
+    height: 7px;
+    border-radius: 999px;
+    background: #e5e7eb;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    border-radius: 999px;
+  }
+
+  .agent-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 999px;
+    background: #e5e7eb;
+    overflow: hidden;
+  }
+
+  .agent-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .text-muted-xs {
+    font-size: 0.78rem;
+    color: #94a3b8;
+  }
+</style>
+
+<div class="admin-dashboard">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h3 class="mb-0">Dashboard</h3>
+  </div>
+
+  <!-- ===== TOP STATS ===== -->
+  <div class="row g-3 mb-4">
+    <div class="col-12 col-sm-6 col-lg-3">
+      <div class="card card-soft stat-card">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <div class="stat-label">Total Users</div>
+            <div class="stat-value"><%= stats.totalUsers || 0 %></div>
+          </div>
+          <div class="mini-ring">
+            <div class="mini-ring-inner"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-sm-6 col-lg-3">
+      <div class="card card-soft stat-card">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <div class="stat-label">Total Inquiries</div>
+            <div class="stat-value"><%= stats.totalInquiries || 0 %></div>
+          </div>
+          <div class="mini-ring">
+            <div class="mini-ring-inner"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-sm-6 col-lg-3">
+      <div class="card card-soft stat-card">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <div class="stat-label">Total Customers</div>
+            <div class="stat-value"><%= stats.totalCustomers || 0 %></div>
+          </div>
+          <div class="mini-ring">
+            <div class="mini-ring-inner"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-sm-6 col-lg-3">
+      <div class="card card-soft stat-card">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <div class="stat-label">New Orders</div>
+            <div class="stat-value"><%= stats.newOrders || 0 %></div>
+          </div>
+          <div class="mini-ring">
+            <div class="mini-ring-inner"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== MIDDLE ROW ===== -->
+  <div class="row g-3 mb-4">
+    <!-- Total Revenue + Bar Chart -->
+    <div class="col-lg-8">
+      <div class="card card-soft p-3 h-100">
+        <div class="d-flex justify-content-between align-items-center mb-1">
+          <h5 class="mb-0">Total Revenue</h5>
+          <div class="d-flex gap-3 align-items-center text-muted-xs">
+            <span class="d-flex align-items-center gap-1">
+              <span style="width:10px;height:10px;border-radius:999px;background:#6366f1;"></span> Last Month
+            </span>
+            <span class="d-flex align-items-center gap-1">
+              <span style="width:10px;height:10px;border-radius:999px;background:#ec4899;"></span> Running Month
+            </span>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-end mb-3">
+          <div>
+            <div style="font-size:2rem;font-weight:700;">₹ <%= stats.totalRevenue || 0 %></div>
+            <div class="text-muted-xs">
+              <span style="color:#22c55e;">0.8% ↑</span> than last month
+            </div>
+          </div>
+        </div>
+
+        <!-- Dummy bar chart -->
+        <div>
+          <div class="bar-chart">
+            <div class="text-center w-100">
+              <div class="bar" style="height:60%;"></div>
+              <div class="bar-label">Jan</div>
+            </div>
+            <div class="text-center w-100">
+              <div class="bar bar-alt" style="height:45%;"></div>
+              <div class="bar-label">Feb</div>
+            </div>
+            <div class="text-center w-100">
+              <div class="bar" style="height:70%;"></div>
+              <div class="bar-label">Mar</div>
+            </div>
+            <div class="text-center w-100">
+              <div class="bar bar-alt" style="height:40%;"></div>
+              <div class="bar-label">Apr</div>
+            </div>
+            <div class="text-center w-100">
+              <div class="bar" style="height:80%;"></div>
+              <div class="bar-label">May</div>
+            </div>
+            <div class="text-center w-100">
+              <div class="bar bar-alt" style="height:50%;"></div>
+              <div class="bar-label">Jun</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Property Referrals / Sources -->
+    <div class="col-lg-4">
+      <div class="card card-soft p-3 h-100">
+        <h5 class="mb-3">Property Referrals</h5>
+
+        <div class="mb-3">
+          <div class="d-flex justify-content-between">
+            <span class="text-muted-xs">Social Media</span>
+            <span class="text-muted-xs">64%</span>
+          </div>
+          <div class="progress-line">
+            <div class="progress-fill" style="width:64%;background:#6366f1;"></div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <div class="d-flex justify-content-between">
+            <span class="text-muted-xs">Marketplace</span>
+            <span class="text-muted-xs">40%</span>
+          </div>
+          <div class="progress-line">
+            <div class="progress-fill" style="width:40%;background:#22c55e;"></div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <div class="d-flex justify-content-between">
+            <span class="text-muted-xs">Websites</span>
+            <span class="text-muted-xs">50%</span>
+          </div>
+          <div class="progress-line">
+            <div class="progress-fill" style="width:50%;background:#f97316;"></div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <div class="d-flex justify-content-between">
+            <span class="text-muted-xs">Digital Ads</span>
+            <span class="text-muted-xs">80%</span>
+          </div>
+          <div class="progress-line">
+            <div class="progress-fill" style="width:80%;background:#ec4899;"></div>
+          </div>
+        </div>
+
+        <div class="mb-1">
+          <div class="d-flex justify-content-between">
+            <span class="text-muted-xs">Others</span>
+            <span class="text-muted-xs">15%</span>
+          </div>
+          <div class="progress-line">
+            <div class="progress-fill" style="width:15%;background:#ef4444;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== BOTTOM ROW ===== -->
+  <div class="row g-3">
+    <!-- Top Agent -->
+    <div class="col-lg-4">
+      <div class="card card-soft p-3 h-100">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <h6 class="mb-0">Top Agent</h6>
+          <button class="btn btn-sm btn-outline-light border text-muted-xs">View All</button>
+        </div>
+
+        <div class="mt-2">
+          <% const agents = stats.topAgents || [
+            {name: 'Wade Warren', role: 'Top Agent'},
+            {name: 'Darrell Steward', role: 'Top Agent'},
+            {name: 'Jacob Jones', role: 'Top Agent'},
+            {name: 'Albert Flores', role: 'Top Agent'}
+          ]; %>
+
+          <% agents.forEach(function(a){ %>
+            <div class="d-flex align-items-center justify-content-between mb-3">
+              <div class="d-flex align-items-center gap-2">
+                <div class="agent-avatar">
+                  <!-- Placeholder avatar -->
+                </div>
+                <div>
+                  <div style="font-size:0.9rem;font-weight:600;"><%= a.name %></div>
+                  <div class="text-muted-xs"><%= a.role %></div>
+                </div>
+              </div>
+              <i class="bi bi-three-dots-vertical text-muted"></i>
+            </div>
+          <% }) %>
+        </div>
+      </div>
+    </div>
+
+    <!-- Customer cards -->
+    <div class="col-lg-4">
+      <div class="card card-soft p-3 mb-3">
+        <h6 class="mb-1">Customer</h6>
+        <div class="text-muted-xs mb-2">Total Customer</div>
+        <div class="d-flex align-items-end justify-content-between">
+          <div>
+            <div style="font-size:1.4rem;font-weight:700;"><%= stats.totalCustomers || '5007k' %></div>
+            <div class="text-muted-xs" style="color:#6366f1;">21.77%</div>
+          </div>
+          <div style="width:90px;height:55px;border-radius:12px;background:linear-gradient(180deg,#a5b4fc,#6366f1);opacity:.7;"></div>
+        </div>
+      </div>
+
+      <div class="card card-soft p-3">
+        <h6 class="mb-1">New Customer This Month</h6>
+        <div class="text-muted-xs mb-2">New joined</div>
+        <div class="d-flex align-items-end justify-content-between">
+          <div>
+            <div style="font-size:1.4rem;font-weight:700;"><%= stats.newCustomers || '12k' %></div>
+            <div class="text-muted-xs" style="color:#22c55e;">21.77%</div>
+          </div>
+          <div style="width:90px;height:55px;border-radius:12px;background:linear-gradient(180deg,#f9a8d4,#ec4899);opacity:.7;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Latest Sales -->
+    <div class="col-lg-4">
+      <div class="card card-soft p-3 h-100">
+        <h6 class="mb-3">Latest Sales</h6>
+
+        <% const sales = stats.latestSales || [
+          {title:'Gateway of Pacific', addr:'8080 Railroad St.', price:'$45'},
+          {title:'801 Brannan', addr:'3605 Parker Rd.', price:'$45'},
+          {title:'Transbay Block 9', addr:'8558 Green Rd.', price:'$45'},
+          {title:'Seranno Model Room 806', addr:'775 Rolling Green Rd.', price:'$45'}
+        ]; %>
+
+        <% sales.forEach(function(s){ %>
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <div class="d-flex align-items-center gap-2">
+              <div style="width:42px;height:42px;border-radius:10px;background:#e5e7eb;"></div>
+              <div>
+                <div style="font-size:0.9rem;font-weight:600;"><%= s.title %></div>
+                <div class="text-muted-xs"><%= s.addr %></div>
+              </div>
+            </div>
+            <div style="font-weight:600;"><%= s.price %></div>
+          </div>
+        <% }) %>
+      </div>
+    </div>
+  </div>
+</div>

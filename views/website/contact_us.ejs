@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Contact Us | Live Pscy</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+
+  <!-- Font Awesome for icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  />
+
+  <style>
+    .contact-banner-wrapper {
+      max-width: 1200px;
+      height: 400px;
+      overflow: hidden;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .contact-banner-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .section-title {
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .contact-card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 25px 20px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    }
+
+    .contact-info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .contact-info-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(220, 53, 69, 0.1);
+      font-size: 18px;
+    }
+
+    .contact-form-card {
+      background: #ffe5e5; /* light red bg */
+      border-radius: 16px;
+      padding: 25px 20px;
+      box-shadow: 0 10px 30px rgba(220, 53, 69, 0.35); /* red shadow */
+      border-left: 4px solid #dc3545;
+    }
+
+    .contact-form-card .form-label {
+      font-weight: 500;
+    }
+
+    .contact-form-card .btn-submit {
+      background: #dc3545;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .contact-form-card .btn-submit:hover {
+      filter: brightness(0.9);
+      transform: translateY(-1px);
+    }
+
+    .india-map-wrapper {
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .india-map-wrapper img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+  <!-- yaha tum apna header include kar sakte ho agar layout use kar rahe ho -->
+
+  <!-- BANNER SECTION -->
+  <section class="py-4 py-md-5">
+    <div class="container d-flex justify-content-center">
+      <div class="contact-banner-wrapper">
+        <!-- 1200x400 banner image -->
+        <img src="/images/contact-banner.jpg" alt="Contact Live Pscy" />
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT CONTENT + FORM -->
+  <section class="py-5 bg-light">
+    <div class="container">
+      <div class="row gy-4">
+        <!-- LEFT: CONTACT INFO (col-md-4) -->
+        <div class="col-md-4">
+          <div class="contact-card h-100">
+            <h3 class="section-title mb-3">Contact Us</h3>
+            <p class="mb-3">
+              Kis bhi query, appointment ya guidance ke liye humse directly contact karein.
+            </p>
+
+            <div class="contact-info-item">
+              <div class="contact-info-icon">
+                <i class="fa-solid fa-location-dot"></i>
+              </div>
+              <div>
+                <h6 class="mb-1">Address</h6>
+                <p class="mb-0 small">
+                  Live Pscy Center, Your Street, Your City, India
+                </p>
+              </div>
+            </div>
+
+            <div class="contact-info-item">
+              <div class="contact-info-icon">
+                <i class="fa-solid fa-envelope"></i>
+              </div>
+              <div>
+                <h6 class="mb-1">Email</h6>
+                <p class="mb-0 small">support@livepscy.com</p>
+              </div>
+            </div>
+
+            <div class="contact-info-item">
+              <div class="contact-info-icon">
+                <i class="fa-solid fa-phone"></i>
+              </div>
+              <div>
+                <h6 class="mb-1">Mobile No.</h6>
+                <p class="mb-0 small">+91-9876543210</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: FORM (col-md-8) -->
+        <div class="col-md-8">
+          <div class="contact-form-card">
+            <h3 class="section-title mb-3">Send Us a Message</h3>
+
+            <!-- Success / Error Messages -->
+            <% if (success) { %>
+              <div class="alert alert-success py-2"><%= success %></div>
+            <% } %>
+            <% if (error) { %>
+              <div class="alert alert-danger py-2"><%= error %></div>
+            <% } %>
+
+            <form action="/contact" method="POST" novalidate>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label for="full_name" class="form-label">Full Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="full_name"
+                    name="full_name"
+                    placeholder="Enter your full name"
+                    required
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="mobile_no" class="form-label">Mobile No.</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="mobile_no"
+                    name="mobile_no"
+                    placeholder="Enter your mobile number"
+                    required
+                  />
+                </div>
+                <div class="col-md-12">
+                  <label for="email" class="form-label">Email ID</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your email address"
+                    required
+                  />
+                </div>
+                <div class="col-md-12">
+                  <label for="message" class="form-label">Message</label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    class="form-control"
+                    rows="4"
+                    placeholder="Write your message here..."
+                    required
+                  ></textarea>
+                </div>
+                <div class="col-12 mt-2">
+                  <button type="submit" class="btn btn-submit">
+                    Submit Query
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INDIA MAP SECTION (col-md-12) -->
+  <section class="py-5">
+    <div class="container">
+      <h3 class="section-title mb-3 text-center">Our Location (India)</h3>
+      <p class="text-center mb-4">
+        Live Pscy pan-India online sessions ke through clients ko service provide karta hai.
+      </p>
+      <div class="india-map-wrapper">
+        <!-- yaha India map ka image rakho -->
+        <img src="/images/india-map.png" alt="India Map" />
+      </div>
+    </div>
+  </section>
+
+  <!-- yaha footer include kar sakte ho -->
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

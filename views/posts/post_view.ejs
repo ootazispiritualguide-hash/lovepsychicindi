@@ -1,0 +1,255 @@
+<% layout('layout') -%>
+<% var pageTitle = typeof title !== 'undefined' ? title : 'Blog'; %>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<!-- ====== HEADER START ====== -->
+<nav class="navbar navbar-expand-lg bg-light border-bottom py-2">
+  <div class="container">
+    
+    <!-- Logo -->
+    <a class="navbar-brand d-flex align-items-center" href="/">
+      <img src="/images/logo.png" alt="Logo" height="45" class="me-2">
+      <strong>live Pcsy</strong>
+    </a>
+    <!-- Mobile Menu Button -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- NAV LINKS -->
+    <div class="collapse navbar-collapse" id="mainNavbar">
+      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="/about">About Us</a></li>
+        <li class="nav-item"><a class="nav-link" href="/services">Services</a></li>
+        <li class="nav-item"><a class="nav-link" href="/contact">Contact Us</a></li>
+      </ul>
+
+      <!-- Social Icons -->
+      <div class="d-flex gap-2">
+        <a href="#" class="social-box"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="social-box"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="social-box"><i class="fab fa-telegram"></i></a>
+        <a href="#" class="social-box"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+  </div>
+</nav>
+<!-- ====== HEADER END ====== -->
+<style>
+  .nav-link {
+    font-weight: 500;
+    padding: 8px 15px;
+  }
+  .nav-link:hover {
+    color: #7b61ff;
+  }
+
+  .social-box {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f1f1f1;
+    border-radius: 8px;
+    font-size: 17px;
+    color: #464646;
+    transition: .3s ease;
+  }
+  .social-box:hover {
+    background: #7b61ff;
+    color: #fff;
+    transform: translateY(-2px);
+  }
+
+  .navbar-brand strong {
+    font-size: 20px;
+  }
+</style>
+
+<style>
+  .blog-section-title {
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+
+  .blog-card {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+    transition: transform .3s ease, box-shadow .3s ease;
+    background: #fff;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .blog-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 28px rgba(0,0,0,0.12);
+  }
+
+  .blog-card-img {
+    height: 180px;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .blog-card-body {
+    padding: 15px 18px 18px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .blog-category {
+    display: inline-block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background: #f3e8ff;
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-bottom: 10px;
+    color: #7b61ff;
+    font-weight: 600;
+  }
+
+  .blog-title {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .blog-content {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 10px;
+  }
+
+  .blog-meta {
+    font-size: 12px;
+    color: #888;
+  }
+
+  .blog-readmore {
+    margin-top: auto;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .blog-readmore a {
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    color: #7b61ff;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: .3s ease;
+  }
+
+  .blog-readmore a:hover {
+    transform: translateX(3px);
+  }
+</style>
+
+<style>
+  .blog-detail-img {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 20px;
+  }
+  .blog-category-badge {
+    background: #f3e8ff;
+    color: #7b61ff;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 999px;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-bottom: 10px;
+  }
+  .blog-title {
+    font-size: 30px;
+    font-weight: 800;
+    margin-bottom: 12px;
+    text-align: center;
+  }
+  .blog-slug {
+    font-size: 13px;
+    color: #999;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .blog-meta {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 14px;
+    color: #777;
+  }
+  .blog-content {
+    font-size: 15px;
+    line-height: 1.8;
+    color: #444;
+    margin-top: 20px;
+  }
+  .blog-container {
+    max-width: 800px;
+  }
+</style>
+
+<section class="py-5">
+  <div class="container blog-container">
+
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+
+        <!-- CATEGORY BADGE -->
+        <span class="blog-category-badge"><%= post.category %></span>
+
+        <!-- TITLE -->
+        <h1 class="blog-title"><%= post.title %></h1>
+
+        <!-- SLUG -->
+        <div class="blog-slug">Slug: <%= post.slug %></div>
+
+        <!-- DATE -->
+        <div class="blog-meta">
+          <i class="far fa-calendar-alt"></i>
+          <% if (post.created_at) { %>
+            <%= new Date(post.created_at).toISOString().slice(0,10) %>
+          <% } %>
+        </div>
+
+        <!-- IMAGE -->
+        <% if (post.image) { %>
+          <img src="/public/uploads/posts_img/<%= post.image %>" class="blog-detail-img">
+        <% } %>
+
+        <!-- FULL CONTENT -->
+        <div class="blog-content">
+          <%- post.content
+                .split(/\r?\n\r?\n/)
+                .map(p => `<p>${p.replace(/\r?\n/g, '<br>')}</p>`)
+                .join('') %>
+        </div>
+
+        <div class="mt-4 d-flex justify-content-between">
+          <a href="/posts" class="btn btn-outline-secondary btn-sm">
+            ← Back
+          </a>
+
+          <a href="/posts/edit/<%= post.id %>" class="btn btn-primary btn-sm">
+            Edit Post
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>

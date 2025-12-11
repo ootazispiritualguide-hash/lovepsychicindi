@@ -1,0 +1,57 @@
+<%- include('../partials/admin-header') %>
+<%- include('../partials/admin-sidebar') %>
+
+<div style="margin-left:240px; padding:24px">
+  <h2>Manage Banners</h2>
+
+  <% if (success && success.length) { %>
+    <div class="alert alert-success"><%= success %></div>
+  <% } %>
+  <% if (error && error.length) { %>
+    <div class="alert alert-danger"><%= error %></div>
+  <% } %>
+
+  <div class="card p-3 mb-4">
+    <form action="/admin/banner" method="POST" enctype="multipart/form-data">
+      <div class="mb-2">
+        <label>Title</label>
+        <input name="title" class="form-control" placeholder="Banner title" required>
+      </div>
+      <div class="mb-2">
+        <label>Content</label>
+        <textarea name="content" class="form-control" rows="3" placeholder="Short content"></textarea>
+      </div>
+      <div class="mb-2">
+        <label>Image (1200 x 500 px)</label>
+        <input name="banner_image" type="file" accept="image/*" class="form-control" required>
+        <div class="form-text">Recommended size: 1200 x 500 px. Max 2 MB.</div>
+      </div>
+      <div class="form-check mb-2">
+        <input class="form-check-input" type="checkbox" name="make_active" id="make_active">
+        <label class="form-check-label" for="make_active">Set active (show on homepage)</label>
+      </div>
+      <button class="btn btn-primary">Upload Banner</button>
+    </form>
+  </div>
+
+  <h5>Existing Banners</h5>
+  <div class="row g-3">
+    <% banners.forEach(b => { %>
+      <div class="col-md-6">
+        <div class="card p-2 d-flex flex-row align-items-center">
+          <img src="<%= b.image_path %>" style="width:180px;height:75px;object-fit:cover;border-radius:6px;margin-right:12px" alt="">
+          <div style="flex:1">
+            <h6 class="mb-1"><%= b.title %></h6>
+            <p class="mb-1 text-muted"><%= b.content && b.content.substring(0,80) %></p>
+            <form action="/admin/banner/<%= b.id %>/toggle" method="POST" style="display:inline">
+              <button class="btn btn-sm <%= b.is_active ? 'btn-success' : 'btn-outline-secondary' %>">
+                <%= b.is_active ? 'Active' : 'Activate' %>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+
+</div>

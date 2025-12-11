@@ -1,0 +1,14 @@
+<%- include('../partials/admin-header') %>
+<%- include('../partials/admin-sidebar') %>
+<div style="margin-left:240px; padding:24px">
+  <h2>Change Profile</h2>
+  <div class="card p-3">
+    <form action="/admin/change-profile" method="POST" enctype="multipart/form-data">
+      <div class="mb-2"><label>Name</label><input name="name" class="form-control" value="<%= admin.name %>" required></div>
+      <div class="mb-2"><label>Email</label><input name="email" type="email" class="form-control" value="<%= admin.email %>" required></div>
+      <div class="mb-2"><label>New Password (leave blank to keep current)</label><input name="password" type="password" class="form-control"></div>
+      <div class="mb-3"><label>Avatar (optional)</label><input name="avatar" type="file" class="form-control"></div>
+      <button class="btn btn-success">Save Changes</button>
+    </form>
+  </div>
+</div>

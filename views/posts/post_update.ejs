@@ -1,0 +1,24 @@
+<% layout('layout') -%>
+<% var pageTitle = 'Post Updated'; %>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<section class="py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 mx-auto">
+        <div class="alert alert-success">
+          <h5 class="mb-1"><%= message %></h5>
+          <p class="mb-0">You will be redirected back to blog.</p>
+        </div>
+        <a href="<%= redirectUrl %>" class="btn btn-primary btn-sm">Go to Blog</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  setTimeout(function() {
+    window.location.href = "<%= redirectUrl %>";
+  }, 1500);
+</script>

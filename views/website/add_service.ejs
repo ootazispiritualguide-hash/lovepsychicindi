@@ -1,0 +1,33 @@
+<%- include('../partials/admin-header') %>
+<%- include('../partials/admin-sidebar') %>
+
+<div style="margin-left:240px; padding:24px">
+
+<div class="container py-5">
+  <h3 class="mb-4">Add Service</h3>
+
+  <form method="post" action="/services/add">
+    <div class="mb-3">
+      <label class="form-label">Service Title</label>
+      <input type="text" name="title" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Description</label>
+      <textarea name="description" rows="4" class="form-control" required></textarea>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Price (₹)</label>
+      <input type="number" step="0.01" name="price" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Duration (minutes)</label>
+      <input type="number" name="duration_minutes" class="form-control" required>
+    </div>
+
+    <button class="btn btn-success">Save</button>
+    <a href="/services/add" class="btn btn-secondary">Back</a>
+  </form>
+</div>

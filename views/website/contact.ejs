@@ -1,0 +1,295 @@
+<% layout('layout') -%>
+<% var title = 'Home'; %>
+
+<!-- ====== HEADER START ====== -->
+<nav class="navbar navbar-expand-lg bg-light border-bottom py-2">
+  <div class="container">
+    
+    <!-- Logo -->
+    <a class="navbar-brand d-flex align-items-center" href="/">
+      <img src="/images/logo.png" alt="Logo" height="45" class="me-2">
+      <strong>live Pcsy</strong>
+    </a>
+    <!-- Mobile Menu Button -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- NAV LINKS -->
+    <div class="collapse navbar-collapse" id="mainNavbar">
+      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="/about">About Us</a></li>
+        <li class="nav-item"><a class="nav-link" href="/services">Services</a></li>
+                <li class="nav-item"><a class="nav-link" href="/posts">Posts</a></li>
+        <li class="nav-item"><a class="nav-link" href="/contact">Contact Us</a></li>
+      </ul>
+
+      <!-- Social Icons -->
+      <div class="d-flex gap-2">
+        <a href="#" class="social-box"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="social-box"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="social-box"><i class="fab fa-telegram"></i></a>
+        <a href="#" class="social-box"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+  </div>
+</nav>
+<!-- ====== HEADER END ====== -->
+<style>
+  .nav-link {
+    font-weight: 500;
+    padding: 8px 15px;
+  }
+  .nav-link:hover {
+    color: #7b61ff;
+  }
+
+   .contact-banner-wrapper {
+      max-width: 1200px;
+      height: 400px;
+      overflow: hidden;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .contact-banner-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .section-title {
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .contact-card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 25px 20px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    }
+
+    .contact-info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .contact-info-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(220, 53, 69, 0.1);
+      font-size: 18px;
+    }
+
+    .contact-form-card {
+      background: #ffe5e5; /* light red bg */
+      border-radius: 16px;
+      padding: 25px 20px;
+      box-shadow: 0 10px 30px rgba(220, 53, 69, 0.35); /* red shadow */
+      border-left: 4px solid #dc3545;
+    }
+
+    .contact-form-card .form-label {
+      font-weight: 500;
+    }
+
+    .contact-form-card .btn-submit {
+      background: #dc3545;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .contact-form-card .btn-submit:hover {
+      filter: brightness(0.9);
+      transform: translateY(-1px);
+    }
+
+    .india-map-wrapper {
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .india-map-wrapper img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+
+  .social-box {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f1f1f1;
+    border-radius: 8px;
+    font-size: 17px;
+    color: #464646;
+    transition: .3s ease;
+  }
+  .social-box:hover {
+    background: #7b61ff;
+    color: #fff;
+    transform: translateY(-2px);
+  }
+
+  .navbar-brand strong {
+    font-size: 20px;
+  }
+</style>
+
+
+  <!-- BANNER SECTION -->
+  <section class="py-4 py-md-5">
+    <div class="container d-flex justify-content-center">
+      <div class="about-banner-wrapper">
+        <!-- banner image (1200 x 400) - path apne hisaab se change karo -->
+        <img src="/images/contactimg12.png" alt="About Live Pscy Banner" />
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT CONTENT + FORM -->
+  <section class="py-5 bg-light">
+    <div class="container">
+      <div class="row gy-4">
+        <!-- LEFT: CONTACT INFO (col-md-4) -->
+        <div class="col-md-4">
+          <div class="contact-card h-100">
+            <h3 class="section-title mb-3">Contact Us</h3>
+            <p class="mb-3">
+              Kis bhi query, appointment ya guidance ke liye humse directly contact karein.
+            </p>
+
+            <div class="contact-info-item">
+              <div class="contact-info-icon">
+                <i class="fa-solid fa-location-dot"></i>
+              </div>
+              <div>
+                <h6 class="mb-1">Address</h6>
+                <p class="mb-0 small">
+                  Live Pscy Center, Your Street, Your City, India
+                </p>
+              </div>
+            </div>
+
+            <div class="contact-info-item">
+              <div class="contact-info-icon">
+                <i class="fa-solid fa-envelope"></i>
+              </div>
+              <div>
+                <h6 class="mb-1">Email</h6>
+                <p class="mb-0 small">support@livepscy.com</p>
+              </div>
+            </div>
+
+            <div class="contact-info-item">
+              <div class="contact-info-icon">
+                <i class="fa-solid fa-phone"></i>
+              </div>
+              <div>
+                <h6 class="mb-1">Mobile No.</h6>
+                <p class="mb-0 small">+91-9876543210</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: FORM (col-md-8) -->
+        <div class="col-md-8">
+          <div class="contact-form-card">
+            <h3 class="section-title mb-3">Send Us a Message</h3>
+
+            <!-- Success / Error Messages -->
+            <% if (success) { %>
+              <div class="alert alert-success py-2"><%= success %></div>
+            <% } %>
+            <% if (error) { %>
+              <div class="alert alert-danger py-2"><%= error %></div>
+            <% } %>
+
+            <form action="/contact" method="POST" novalidate>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label for="full_name" class="form-label">Full Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="full_name"
+                    name="full_name"
+                    placeholder="Enter your full name"
+                    required
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="mobile_no" class="form-label">Mobile No.</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="mobile_no"
+                    name="mobile_no"
+                    placeholder="Enter your mobile number"
+                    required
+                  />
+                </div>
+                <div class="col-md-12">
+                  <label for="email" class="form-label">Email ID</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your email address"
+                    required
+                  />
+                </div>
+                <div class="col-md-12">
+                  <label for="message" class="form-label">Message</label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    class="form-control"
+                    rows="4"
+                    placeholder="Write your message here..."
+                    required
+                  ></textarea>
+                </div>
+                <div class="col-12 mt-2">
+                  <button type="submit" class="btn btn-submit">
+                    Submit Query
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INDIA MAP SECTION (col-md-12) -->
+ 
+<iframe 
+  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7236720.398129916!2d77.01220302181678!3d27.014335482497806!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x398d3fef3f53e851%3A0x5fea0beaeee43d0e!2sUttar%20Pradesh!5e0!3m2!1sen!2sin!4v1708324110402!5m2!1sen!2sin" 
+  width="100%" 
+  height="450" 
+  style="border:0; border-radius:12px; box-shadow:0 0 15px rgba(0,0,0,.1);" 
+  allowfullscreen="" 
+  loading="lazy">
+</iframe>
+
+
+  <!-- yaha footer include kar sakte ho -->
+  <%- include("footer") %>

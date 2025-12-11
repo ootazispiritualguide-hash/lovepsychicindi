@@ -1,0 +1,21 @@
+<%- include('../partials/admin-header') %>
+<%- include('../partials/admin-sidebar') %>
+<div style="margin-left:240px; padding:24px">
+  <h2>Profile</h2>
+  <div class="card p-3">
+    <div class="row">
+      <div class="col-md-3">
+        <% if (admin.avatar) { %>
+          <img src="<%= admin.avatar %>" class="img-fluid rounded" alt="avatar">
+        <% } else { %>
+          <div class="bg-secondary text-white p-4 text-center">No Avatar</div>
+        <% } %>
+      </div>
+      <div class="col-md-9">
+        <p><strong>Name:</strong> <%= admin.name %></p>
+        <p><strong>Email:</strong> <%= admin.email %></p>
+        <a href="/admin/change-profile" class="btn btn-primary">Change Profile</a>
+      </div>
+    </div>
+  </div>
+</div>

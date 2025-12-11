@@ -1,0 +1,56 @@
+<%- include('../partials/admin-header') %>
+<%- include('../partials/admin-sidebar') %>
+
+<div style="margin-left:240px; padding:24px">
+
+  <div class="container-fluid py-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h1 class="page-title mb-0">Contact Queries</h1>
+    </div>
+
+    <div class="table-wrapper">
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped align-middle">
+          <thead class="table-dark">
+            <tr>
+              <th style="width: 60px;">ID</th>
+              <th>Full Name</th>
+              <th>Mobile No</th>
+              <th>Email</th>
+              <th>Message</th>
+              <th style="width: 170px;">Created At</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if (queries && queries.length > 0) { %>
+              <% queries.forEach(function(row) { %>
+                <tr>
+                  <td>
+                    <span class="badge bg-primary badge-id"><%= row.id %></span>
+                  </td>
+                  <td><%= row.full_name %></td>
+                  <td><%= row.mobile_no %></td>
+                  <td><%= row.email %></td>
+                  <td class="message-cell" title="<%= row.message %>">
+                    <%= row.message %>
+                  </td>
+                  <td class="created-at">
+                    <%= row.created_at ? row.created_at : '' %>
+                  </td>
+                </tr>
+              <% }); %>
+            <% } else { %>
+              <tr>
+                <td colspan="6" class="text-center py-4">
+                  No queries found.
+                </td>
+              </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

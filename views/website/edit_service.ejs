@@ -1,0 +1,37 @@
+<%- include('../partials/admin-header') %>
+<%- include('../partials/admin-sidebar') %>
+
+<div style="margin-left:240px; padding:24px">
+
+
+<div class="container py-5">
+  <h3 class="mb-4">Edit Service</h3>
+
+  <form method="post" action="/services/update/<%= service.id %>">
+    <div class="mb-3">
+      <label class="form-label">Service Title</label>
+      <input type="text" name="title" class="form-control"
+             value="<%= service.title %>" required>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Description</label>
+      <textarea name="description" rows="4" class="form-control" required><%= service.description %></textarea>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Price (₹)</label>
+      <input type="number" step="0.01" name="price" class="form-control"
+             value="<%= service.price %>" required>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Duration (minutes)</label>
+      <input type="number" name="duration_minutes" class="form-control"
+             value="<%= service.duration_minutes %>" required>
+    </div>
+
+    <button class="btn btn-primary">Update</button>
+    <a href="/admin/services" class="btn btn-secondary">Back</a>
+  </form>
+</div>

@@ -1,0 +1,114 @@
+<%- include('../partials/admin-header') %>
+<%- include('../partials/admin-sidebar') %>
+<style>.page-title {
+  font-weight: 600;
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
+.table-wrapper {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 0 10px rgba(0,0,0,.05);
+}
+.content-cell {
+  max-width: 350px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* 3 lines */
+  -webkit-box-orient: vertical;
+}
+.created-at {
+  font-size: 0.85rem;
+  color: #666;
+}
+.post-thumb {
+  width: 70px;
+  height: 45px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+</style>
+<div style="margin-left:240px; padding:24px">
+
+<div class="container-fluid py-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="page-title mb-0">Posts</h1>
+    <!-- Agar "Add New" button chahiye to yaha laga sakte ho -->
+    <!-- <a href="/admin/posts/create" class="btn btn-success btn-sm">+ Add New Post</a> -->
+  </div>
+
+  <div class="table-wrapper">
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped align-middle">
+        <thead class="table-dark">
+          <tr>
+            <th width="60">ID</th>
+            <th>Title</th>
+            <th>Slug</th>
+            <th>Category</th>
+            <th width="100">Image</th>
+            <th>Content</th>
+            <th width="170">Created At</th>
+            <th width="150">Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% if (posts && posts.length) { %>
+            <% posts.forEach(function(post) { %>
+              <tr>
+                <td><%= post.id %></td>
+                <td><%= post.title %></td>
+                <td><%= post.slug %></td>
+                <td><%= post.category %></td>
+
+                     <td>
+  <% if (post.image) { %>
+    <img src="/uploads/posts_img/<%= post.image %>" class="post-thumb">
+  <% } else { %>
+    <span class="text-muted">No image</span>
+  <% } %>
+</td>
+
+
+                <td class="content-cell" title="<%= post.content %>">
+                  <%= post.content %>
+                </td>
+
+                <td class="created-at">
+                  <%= post.created_at %>
+                </td>
+
+                <td>
+                  <a href="/posts/edit/<%= post.id %>" class="btn btn-sm btn-primary me-1">
+                    Edit
+                  </a>
+
+                  <form action="/admin/posts/<%= post.id %>/delete" method="POST" class="d-inline"
+                        onsubmit="return confirm('Are you sure you want to delete this post?');">
+                    <button type="submit" class="btn btn-sm btn-danger">
+                      Delete
+                    </button>
+                  </form>
+                </td>
+              </tr>
+            <% }); %>
+          <% } else { %>
+            <tr>
+              <td colspan="8" class="text-center py-4">
+                No posts found.
+              </td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

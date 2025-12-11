@@ -1,0 +1,178 @@
+<!-- Sidebar CSS -->
+<style>
+  .lp-sidebar {
+    position: fixed;
+    left: 0;
+    width: 230px;
+    min-height: calc(100vh - 56px);
+    background: linear-gradient(180deg, #4b3eff, #8b3dff);
+    padding: 1rem;
+    color: #fff;
+    /* box-shadow: 2px 0 8px rgba(0,0,0,0.15); */
+    z-index: 1030;
+  }
+
+  .lp-sidebar .sidebar-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: .75rem;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    opacity: .9;
+  }
+
+  .lp-sidebar .nav-link {
+    color: #f8f9fa;
+    font-weight: 500;
+    border-radius: 10px;
+    padding: .55rem .75rem;
+    margin-bottom: .35rem;
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+    /* transition: all .2s ease-in-out; */
+  }
+
+  .lp-sidebar .nav-link i {
+    font-size: .95rem;
+    opacity: .9;
+  }
+
+  .lp-sidebar .nav-link:hover {
+    /* background: rgba(255,255,255,0.18); */
+    transform: translateX(3px);
+    text-decoration: none;
+  }
+
+  .lp-sidebar .nav-link.active {
+    background: #ffffff;
+    color: #5a32ff;
+  }
+
+  /* Content area adjustment */
+  .lp-content {
+    margin-top: 56px;             /* navbar height */
+    margin-left: 230px;           /* sidebar width */
+    padding: 20px;
+    min-height: calc(100vh - 56px);
+    background: #f3f4f8;
+  }
+
+  @media (max-width: 991.98px) {
+    .lp-sidebar {
+      top: 56px;
+      width: 200px;
+      transform: translateX(-100%);
+      transition: transform .3s ease-in-out;
+    }
+    .lp-sidebar.show {
+      transform: translateX(0);
+    }
+    .lp-content {
+      margin-left: 0;
+    }
+  }
+</style>
+
+<!-- Sidebar -->
+<div class="lp-sidebar">
+  <div class="sidebar-title mb-2">Super Admin</div>
+  <ul class="nav flex-column">
+
+    <li class="nav-item">
+      <a href="/admin/dashboard" class="nav-link">
+        <i class="bi bi-speedometer2"></i>
+        Dashboard
+      </a>
+    </li>
+
+      <li class="nav-item">
+      <a href="/admin/banner" class="nav-link">
+        <i class="bi bi-image"></i>
+        Banner Section
+      </a>
+    </li>
+
+      <li class="nav-item">
+      <a href="/admin/sections" class="nav-link">
+        <i class="bi bi-image"></i>
+        About Us
+      </a>
+    </li>
+
+    <!-- <li class="nav-item">
+      <a href="/admin/profile" class="nav-link">
+        <i class="bi bi-person-circle"></i>
+        Profile
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a href="/admin/change-profile" class="nav-link">
+        <i class="bi bi-pencil-square"></i>
+        Change Profile
+      </a>
+    </li> -->
+
+    <hr class="border-light opacity-50 my-2">
+
+    <!-- <li class="nav-item">
+      <a href="/admin/background-color" class="nav-link">
+        <i class="bi bi-palette2"></i>
+        Background Color
+      </a>
+    </li>
+
+  
+
+    <li class="nav-item">
+      <a href="/admin/about-us" class="nav-link">
+        <i class="bi bi-info-circle"></i>
+        About Us
+      </a>
+    </li> -->
+<p>Services Sections</p>
+    <li class="nav-item">
+      <a href="/admin/services" class="nav-link">
+        <i class="bi bi-ui-checks-grid"></i>
+        All Services
+      </a>
+    </li>
+     <li class="nav-item">
+      <a href="../services/add" class="nav-link">
+        <i class="bi bi-ui-checks-grid"></i>
+        Add Service
+      </a>
+    </li>
+    <hr class="border-light opacity-50 my-2">
+
+    <p>Posts Sections</p>
+    <li class="nav-item">
+      <a href="/admin/posts" class="nav-link">
+        <i class="bi bi-ui-checks-grid"></i>
+        All Posts
+      </a>
+    </li>
+     <li class="nav-item">
+      <a href="../posts/post_add" class="nav-link">
+        <i class="bi bi-ui-checks-grid"></i>
+        Add Post
+      </a>
+    </li>
+    <hr class="border-light opacity-50 my-2">
+    <li class="nav-item">
+      <a href="/admin/queries" class="nav-link">
+        <i class="bi bi-ui-checks-grid"></i>
+         Inquiry Data
+      </a>
+    </li>
+    <!-- <li class="nav-item">
+      <a href="/admin/settings" class="nav-link">
+        <i class="bi bi-gear-wide-connected"></i>
+        Settings
+      </a>
+    </li> -->
+  </ul>
+</div>
+
+

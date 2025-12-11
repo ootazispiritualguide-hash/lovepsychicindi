@@ -1,0 +1,65 @@
+<%- include('../partials/admin-header') %>
+<%- include('../partials/admin-sidebar') %>
+
+<div style="margin-left:240px; padding:24px">
+
+<div class="container-fluid py-4">
+
+  <h1 class="page-title">Services</h1>
+
+  <div class="table-wrapper">
+    <table class="table table-bordered table-striped align-middle">
+      <thead class="table-dark">
+        <tr>
+          <th width="60">ID</th>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Duration (Min)</th>
+          <th width="160">Created At</th>
+          <th width="140">Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% if (services && services.length) { %>
+
+          <% services.forEach(function(item) { %>
+            <tr>
+              <td><%= item.id %></td>
+              <td><%= item.title %></td>
+              <td class="message-cell" title="<%= item.description %>">
+                <%= item.description %>
+              </td>
+              <td>₹ <%= item.price %></td>
+              <td><%= item.duration_minutes %></td>
+              <td class="created-at"><%= item.created_at %></td>
+
+              <td>
+                <a href="../services/edit/<%= item.id %>" class="btn btn-sm btn-primary me-1">
+                  Edit
+                </a>
+
+                <form action="/admin/services/<%= item.id %>/delete" method="POST" class="d-inline"
+                      onsubmit="return confirm('Are you sure you want to delete this service?');">
+                  <button type="submit" class="btn btn-sm btn-danger">
+                    Delete
+                  </button>
+                </form>
+              </td>
+            </tr>
+          <% }); %>
+
+        <% } else { %>
+          <tr>
+            <td colspan="7" class="text-center py-4">No services found.</td>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

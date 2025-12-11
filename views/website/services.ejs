@@ -1,0 +1,266 @@
+<% layout('layout') -%>
+<% var title = 'services'; %>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+<!-- ====== HEADER START ====== -->
+<nav class="navbar navbar-expand-lg bg-light border-bottom py-2">
+  <div class="container">
+    
+    <!-- Logo -->
+    <a class="navbar-brand d-flex align-items-center" href="/">
+      <img src="/images/logo.png" alt="Logo" height="45" class="me-2">
+      <strong>live Pcsy</strong>
+    </a>
+    <!-- Mobile Menu Button -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- NAV LINKS -->
+    <div class="collapse navbar-collapse" id="mainNavbar">
+      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="/about">About Us</a></li>
+        <li class="nav-item"><a class="nav-link" href="/services">Services</a></li>
+                <li class="nav-item"><a class="nav-link" href="/posts">Posts</a></li>
+        <li class="nav-item"><a class="nav-link" href="/contact">Contact Us</a></li>
+      </ul>
+
+      <!-- Social Icons -->
+      <div class="d-flex gap-2">
+        <a href="#" class="social-box"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="social-box"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="social-box"><i class="fab fa-telegram"></i></a>
+        <a href="#" class="social-box"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+  </div>
+</nav>
+<!-- ====== HEADER END ====== -->
+
+<style>
+  .nav-link {
+    font-weight: 500;
+    padding: 8px 15px;
+  }
+  .nav-link:hover {
+    color: #7b61ff;
+  }
+
+  .social-box {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f1f1f1;
+    border-radius: 8px;
+    font-size: 17px;
+    color: #464646;
+    transition: .3s ease;
+  }
+  .social-box:hover {
+    background: #7b61ff;
+    color: #fff;
+    transform: translateY(-2px);
+  }
+
+  .navbar-brand strong {
+    font-size: 20px;
+  }
+</style>
+
+<section class="py-5" style="background:#f7ecff;">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h3 class="mb-0">Our Services</h3>
+      <a href="/services/add" class="btn btn-primary btn-sm">+ Add Service</a>
+    </div>
+
+    <div class="row g-4">
+      <% if (!services || services.length === 0) { %>
+        <div class="col-12">
+          <div class="alert alert-info">No services found. Click "Add Service".</div>
+        </div>
+      <% } %>
+
+      <% services.forEach(function(service){ %>
+        <div class="col-md-4">
+          <div class="service-card h-100 d-flex flex-column">
+            <h2 class="service-title">❤ <%= service.title %></h2>
+
+            <!-- Yaha sirf 3 line ka content dikhega (CSS se clamp) -->
+            <p class="service-desc"><%= service.description %></p>
+
+            <div class="d-flex justify-content-between align-items-center mt-3 mb-2">
+              <div>
+                <small>Price:</small>
+                <span class="price-text">$<%= Number(service.price).toFixed(2) %></span>
+              </div>
+              <div>
+                <small class="me-1"><i class="far fa-clock"></i></small>
+                <span><%= service.duration_minutes %> mins</span>
+              </div>
+            </div>
+
+            <!-- Buttons 50% - 50% -->
+          <div class="d-flex gap-2 mt-auto">
+<a href="/services/<%= service.id %>" class="btn-gradient btn-half text-center">
+    View Services
+  </a>
+
+  <button type="button"
+          class="btn-gradient btn-half"
+          data-bs-toggle="modal"
+          data-bs-target="#bookingModal"
+          data-service-id="<%= service.id %>"
+          data-service-title="<%= service.title %>">
+    Book Appointment
+  </button>
+</div>
+
+
+            <div class="mt-2 small service-actions">
+              <a href="/services/edit/<%= service.id %>" class="text-primary me-2">Edit</a>
+              <a href="/services/delete/<%= service.id %>"
+                 class="text-danger"
+                 onclick="return confirm('Delete this service?');">Delete</a>
+            </div>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING POPUP (MODAL) -->
+<!-- BOOKING POPUP (MODAL) -->
+<div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="bookingModalLabel">
+          Book Appointment - <span class="service-name"></span>
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      
+      <!-- IMPORTANT: yahi se data MySQL me jaayega -->
+      <form action="/appointments" method="POST">
+        <div class="modal-body">
+          <!-- Service name/id hidden -->
+          <input type="hidden" name="service_id" id="service_id">
+          <input type="hidden" name="service_title" id="service_title">
+
+          <div class="mb-3">
+            <label class="form-label">Full Name</label>
+            <input type="text" name="full_name" class="form-control" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Mobile No</label>
+            <input type="tel" name="mobile" class="form-control" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Email ID</label>
+            <input type="email" name="email" class="form-control" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Message</label>
+            <textarea name="message" class="form-control" rows="4" required></textarea>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Submit Appointment</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<style>
+  .service-card{
+    background:#fff;
+    border-radius:20px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    padding:25px;
+    position:relative;
+    transition:all .3s ease;
+  }
+  .service-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 18px 40px rgba(0,0,0,.15);
+  }
+  .service-title{
+    font-size:1.2rem;
+    font-weight:600;
+  }
+
+  /* Sirf 3 lines ka text show + ... */
+  .service-desc{
+    font-size:.9rem;
+    color:#666;
+    min-height:70px;
+    display:-webkit-box;
+    -webkit-line-clamp:3;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+  }
+
+  .price-text{
+    font-weight:600;
+    color:#7b61ff;
+  }
+
+  .btn-gradient{
+    border:none;
+    border-radius:30px;
+    padding:10px 20px;
+    background:linear-gradient(90deg,#7b61ff,#ff8b2c);
+    color:#fff;
+    font-weight:500;
+    transition:.3s;
+  }
+  .btn-gradient:hover{
+    opacity:.9;
+    transform:translateY(-2px);
+    color:#fff;
+  }
+
+  /* Dono buttons 50-50 space le */
+  .btn-half{
+    flex:1;
+  }
+</style>
+
+<!-- Bootstrap JS (popup ke liye zaroori) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+<script>
+  // Jab Book Appointment button click hoga to service ka data modal me set hoga
+  var bookingModal = document.getElementById('bookingModal');
+  bookingModal.addEventListener('show.bs.modal', function (event) {
+    var button = event.relatedTarget;
+
+    var serviceId = button.getAttribute('data-service-id');
+    var serviceTitle = button.getAttribute('data-service-title');
+
+    var serviceIdInput = document.getElementById('service_id');
+    var serviceTitleInput = document.getElementById('service_title');
+    var serviceNameSpan = bookingModal.querySelector('.service-name');
+
+    if(serviceIdInput) serviceIdInput.value = serviceId || '';
+    if(serviceTitleInput) serviceTitleInput.value = serviceTitle || '';
+    if(serviceNameSpan) serviceNameSpan.textContent = serviceTitle || '';
+  });
+</script>
+
+  <%- include("footer") %>
+

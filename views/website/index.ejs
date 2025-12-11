@@ -1,0 +1,145 @@
+<% layout('layout') -%>
+<% var title = 'Home'; %>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<!-- ====== HEADER START ====== -->
+<nav class="navbar navbar-expand-lg bg-light border-bottom py-2">
+  <div class="container">
+    
+    <!-- Logo -->
+    <a class="navbar-brand d-flex align-items-center" href="/">
+      <img src="/images/logo.png" alt="Logo" height="45" class="me-2">
+      <strong>live Pcsy</strong>
+    </a>
+    <!-- Mobile Menu Button -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- NAV LINKS -->
+    <div class="collapse navbar-collapse" id="mainNavbar">
+      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="/about">About Us</a></li>
+        <li class="nav-item"><a class="nav-link" href="/services">Services</a></li>
+                <li class="nav-item"><a class="nav-link" href="/posts">Posts</a></li>
+        <li class="nav-item"><a class="nav-link" href="/contact">Contact Us</a></li>
+      </ul>
+
+      <!-- Social Icons -->
+      <div class="d-flex gap-2">
+        <a href="#" class="social-box"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="social-box"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="social-box"><i class="fab fa-telegram"></i></a>
+        <a href="#" class="social-box"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+  </div>
+</nav>
+<!-- ====== HEADER END ====== -->
+<style>
+  .nav-link {
+    font-weight: 500;
+    padding: 8px 15px;
+  }
+  .nav-link:hover {
+    color: #7b61ff;
+  }
+
+  .social-box {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f1f1f1;
+    border-radius: 8px;
+    font-size: 17px;
+    color: #464646;
+    transition: .3s ease;
+  }
+  .social-box:hover {
+    background: #7b61ff;
+    color: #fff;
+    transform: translateY(-2px);
+  }
+
+  .navbar-brand strong {
+    font-size: 20px;
+  }
+</style>
+
+
+<% if (banner) { %>
+  <div class="banner py-5 text-center" style="background-image:url('<%= banner.image_path %>'); background-size:cover; background-position:center; height:500px;">
+    <div class="container h-100 d-flex flex-column justify-content-center align-items-center" style="background:rgba(0,0,0,0.25);">
+      <h1 class="display-5 text-white"><%= banner.title %></h1>
+      <p class="lead text-white"><%= banner.content %></p>
+    </div>
+  </div>
+<% } else { %>
+  <!-- fallback static banner -->
+  <div class="banner py-5 text-center" style="background:linear-gradient(90deg,#7b61ff,#ff7ab6);color:white;height:500px;">
+    <div class="container">
+      <h1 class="display-5">Welcome to live Pcsy</h1>
+      <p class="lead">Spiritual services & readings to guide you.</p>
+    </div>
+  </div>
+<% } %>
+
+<div class="banner py-5 text-center" style="background:linear-gradient(90deg,#7b61ff,#ff7ab6);color:white;">
+  <div class="container">
+    <h1 class="display-5">Welcome to live Pcsy</h1>
+    <p class="lead">Spiritual services & readings to guide you.</p>
+  </div>
+</div>
+
+<% if (section) { %>
+<section class="py-5">
+  <div class="container">
+    <div class="row g-4 align-items-center home-section-box">
+      <div class="col-md-4">
+        <% if (section.image) { %>
+          <img src="<%= section.image %>" alt="<%= section.title %>" class="img-fluid rounded home-section-img">
+        <% } else { %>
+          <div class="border d-flex align-items-center justify-content-center rounded" style="height:220px;">
+            <span class="text-muted">No image</span>
+          </div>
+        <% } %>
+      </div>
+      <div class="col-md-8 text-start">
+        <h2 class="home-section-title mb-3"><%= section.title %></h2>
+        <p class="home-section-text mb-0"><%= section.content %></p>
+      </div>
+    </div>
+  </div>
+</section>
+<% } %>
+<section class="py-5">
+  <div class="container">
+    <h3 class="mb-4">Our Services</h3>
+    <div class="row g-3">
+      <div class="col-md-4">
+        <div class="card p-3 hover-card">
+          <img src="/images/service1.jpg" class="img-fluid mb-2" alt="">
+          <h5>Tarot Reading</h5>
+          <p>Insightful tarot sessions to reveal paths ahead.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card p-3 hover-card">
+          <img src="/images/service2.jpg" class="img-fluid mb-2" alt="">
+          <h5>Astrology</h5>
+          <p>Personalized astrology readings and charts.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card p-3 hover-card">
+          <img src="/images/service3.jpg" class="img-fluid mb-2" alt="">
+          <h5>Crystal Healing</h5>
+          <p>Energy balancing with crystals.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+  <%- include("footer") %>

@@ -1,0 +1,8 @@
+body{font-family:Inter,system-ui,Arial,Helvetica,sans-serif;background:#f6f7fb;color:#333;}
+.banner{color:#fff;}
+.hover-card{transition:transform .25s ease, box-shadow .25s ease;cursor:pointer;}
+.hover-card:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(0,0,0,.12);}
+img{max-width:100%;}
+/* simple animation */
+.fade-in{animation:fadeIn .6s ease;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}

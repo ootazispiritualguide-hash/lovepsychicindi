@@ -1,0 +1,88 @@
+<%- include('../partials/admin-header') %>
+<%- include('../partials/admin-sidebar') %>
+
+<div style="margin-left:240px; padding:24px">
+
+<style>
+  .edit-post-wrapper {
+    padding: 50px 0;
+  }
+  .card-edit {
+    border-radius: 18px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+    border: none;
+  }
+  .form-label {
+    font-weight: 600;
+    font-size: 14px;
+  }
+  .form-control:focus {
+    box-shadow: none;
+    border-color: #7b61ff;
+  }
+  .btn-primary {
+    background: linear-gradient(90deg,#7b61ff,#ff7ab6);
+    border: none;
+  }
+  .btn-primary:hover {
+    opacity: .9;
+  }
+</style>
+
+<section class="edit-post-wrapper">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 mx-auto">
+        <div class="card card-edit">
+          <div class="card-body p-4">
+            <h4 class="mb-3">Edit Post</h4>
+            <form action="/blog/update/<%= post.id %>" method="POST">
+              <div class="mb-3">
+                <label class="form-label">Title</label>
+                <input type="text" name="title" class="form-control" value="<%= post.title %>" required>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Category</label>
+                <input type="text" name="category" class="form-control" value="<%= post.category %>" required>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Slug (URL)</label>
+                <input type="text" name="slug" class="form-control" value="<%= post.slug %>" required>
+                <small class="text-muted">Example: love-psychic-reading-tips</small>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Date</label>
+                <input type="datetime-local" name="created_at" class="form-control"
+                       value="<%= post.created_at ? new Date(post.created_at).toISOString().slice(0,16) : '' %>">
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Content</label>
+                <textarea name="content" class="form-control" rows="7" required><%= post.content %></textarea>
+              </div>
+
+              <!-- Agar baad me image edit karni ho to yaha file input add kar sakte ho -->
+
+              <div class="d-flex justify-content-between">
+                <a href="/admin/posts" class="btn btn-outline-secondary">Cancel</a>
+
+                <div>
+                  <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+              </div>
+            </form>
+
+            <form action="/blog/delete/<%= post.id %>" method="POST" class="mt-3"
+                  onsubmit="return confirm('Are you sure you want to delete this post?')">
+              <!-- <button type="submit" class="btn btn-danger btn-sm">Delete Post</button> -->
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
